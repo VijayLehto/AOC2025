@@ -17,8 +17,8 @@ public:
 		mDefaultVal = T();
 	}
 
-	T& getRef(std::array<int,2> v){
-		return &mFlatVec[idx(v)];
+	void setVal(std::array<int,2> v,T x){
+		mFlatVec[idx(v)] = x;
 	}
 	
 	T operator[](std::array<int,2> v){
@@ -37,6 +37,9 @@ private:
 	int mLen;
 	T mDefaultVal;
 	int idx(std::array<int,2> v){
+		if (v[0] < 0 || v[0] >= mN || v[1] < 0 || v[1] >=mM){
+			return -1;
+		}
 		return v[0]+mN*v[1];
 	}
 

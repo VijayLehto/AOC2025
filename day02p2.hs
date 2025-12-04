@@ -22,7 +22,7 @@ isPalindrome x = take halfn str == drop halfn str
 
 takeNth :: Int -> Int -> String -> String
 takeNth n k x | d == 0 = "0"
-              | otherwise = take (d + k*m) x
+              | otherwise = take (d + k) x
            where l = length(x)
                  (d,m) = l `divMod` n
 
