@@ -17,7 +17,7 @@ std::array<long long int,2> toPair(std::string range){
 int main(){
 
 
-	std::ifstream file("test.txt");
+	std::ifstream file("input05.txt");
 	std::string temp;
 	std::getline(file,temp);
 	

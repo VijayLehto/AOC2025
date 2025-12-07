@@ -13,10 +13,8 @@ public:
         Ranges<T>* mRight;
 
 	Ranges(T l, T r,Ranges<T>* leftChild = nullptr,Ranges<T>* rightChild = nullptr) : mL {l}, mR {r}, mLeft {leftChild}, mRight {rightChild} {
-	std::cout << mL << " " << mR << "\n";
 	}
 	Ranges(std::array<T,2> a) : mL{a[0]}, mR {a[1]} {
-std::cout << mL << " " << mR << "\n";
 	}
 	void insert(T l, T r){
 		if (l > mR +1){
@@ -39,11 +37,24 @@ std::cout << mL << " " << mR << "\n";
 		else{
 			mL = std::min(l,mL);
 			mR = std::max(r,mR);
-			rectify();
+			Ranges* left = mLeft;
+			Ranges* right = mRight;
+			mLeft = nullptr;
+			mRight = nullptr;
+			insert(right);
+			insert(left);
 		}
 	}
 	void insert(std::array<T,2> a){
 		insert(a[0],a[1]);
+	}
+	void insert(Ranges* range){
+		if (range == nullptr){
+			return;
+		}
+		insert(range->mL,range->mR);
+		insert(range->mLeft);
+		insert(range->mRight);
 	}
 	void rectify(){
 		if (mLeft != nullptr){
